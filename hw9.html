@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clock</title>
+    <script src="https://unpkg.com/react@16.8.6/umd/react.development.js" ></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js" ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+    class Toggle extends React.Component {
+        
+        constructor(props){
+            super(props);
+            this.state={
+                isToggleOn:true
+            }
+            this.handleClick=this.handleClick.bind(this);
+            console.log('this is constructor!');
+        }
+    
+    handleClick(){
+        this.setState(state=>({
+            isToggleOn:!state.isToggleOn
+        }))
+        console.log('this is handleClick!')
+    }
+    render(){
+        console.log('this is render')
+        return(
+            <button onClick={this.handleClick}>
+            {this.state.isToggleOn ? 'ON':'OFF'}
+            </button>
+        )
+    }
+    }
+    ReactDOM.render(
+        <Toggle />,
+        document.getElementById('root')
+    )
+  
+     
+    </script>
+</body>
+</html>

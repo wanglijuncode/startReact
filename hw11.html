@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clock</title>
+    <script src="https://unpkg.com/react@16.8.6/umd/react.development.js" ></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js" ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+     class LoginControl extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    this.state = {isLoggedIn: false};
+    console.log('it is constructor!')
+  }
+
+  handleLoginClick() {
+    this.setState({isLoggedIn: true});
+    console.log('it is loginclick')
+  }
+
+  handleLogoutClick() {
+    this.setState({isLoggedIn: false});
+    console.log('it is loginoutclick')
+  }
+
+  render() {
+    const isLoggedIn = this.state.isLoggedIn;
+    let button;
+
+    if (isLoggedIn) {
+      button = <LogoutButton onClick={this.handleLogoutClick} />;
+      console.log('render logout')
+    } else {
+      button = <LoginButton onClick={this.handleLoginClick} />;
+      console.log('render login')
+    }
+
+    return (
+      <div>
+        <Greeting isLoggedIn={isLoggedIn} />
+        {button}
+      </div>
+    );
+  }
+}
+
+function UserGreeting(props) {
+    console.log('it is usergreet')
+  return <h1>Welcome back!</h1>;
+  
+}
+
+function GuestGreeting(props) {
+    console.log('it is guestgreet')
+  return <h1>Please sign up.</h1>;
+
+}
+
+function Greeting(props) {
+    console.log('it is greeting')
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return <UserGreeting />;
+  }
+  return <GuestGreeting />;
+ 
+}
+
+function LoginButton(props) {
+    console.log('it is loginbutton')
+  return (
+    <button onClick={props.onClick}>
+      Login
+    </button>
+  );
+  
+}
+
+function LogoutButton(props) {
+    console.log('it is loginoutbutton')
+  return (
+    <button onClick={props.onClick}>
+      Logout
+    </button>
+  );
+}
+
+ReactDOM.render(
+    
+  <LoginControl />,
+  document.getElementById('root')
+);
+
+     
+    </script>
+</body>
+</html>
